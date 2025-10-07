@@ -8,11 +8,11 @@ class TaskItem extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 5),
+      margin: const EdgeInsets.symmetric(vertical: 10),
       color: Theme.of(context).primaryColor,
       child: InkWell(
         onTap: (){},
-        child: Text(tarefa.titulo, style: TextStyle(color: Colors.white, fontSize: 16),),
+        child: Text(tarefa.titulo, style: TextStyle(color: Colors.white, fontSize: 20),),
       ),
     );
   }

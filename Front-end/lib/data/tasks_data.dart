@@ -3,10 +3,10 @@ import '../model/period.dart';
 import '../model/tasks.dart';
 
 const periodos = [
-  Periodo(id: 'p1', titulo: 'Hoje', cor: Colors.red),
-  Periodo(id: 'p2', titulo: 'Semana', cor: Colors.orange),
-  Periodo(id: 'p3', titulo: '15 dias', cor: Colors.yellow),
-  Periodo(id: 'p4', titulo: 'Mês', cor: Colors.green),
+  Periodo(id: 'p1', titulo: 'Hoje', cor: Colors.red, dias: 1),
+  Periodo(id: 'p2', titulo: '7 dias', cor: Colors.orange, dias: 7),
+  Periodo(id: 'p3', titulo: '15 dias', cor: Colors.yellow, dias: 15),
+  Periodo(id: 'p4', titulo: '30 dias', cor: Colors.green, dias: 30),
 ];
 DateTime agora = DateTime.now();
 

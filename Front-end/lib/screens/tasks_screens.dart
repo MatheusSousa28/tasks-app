@@ -11,7 +11,10 @@ class TasksScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     Widget content = Center(
-      child: Text("Nada para mostrar", style: TextStyle(color: Colors.white, fontSize: 20),),
+      child: Text("Nada para mostrar", 
+      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+        color: Theme.of(context).colorScheme.onSurface,
+        )),
     );
     if (tarefas.isNotEmpty){
       content = ListView.builder(
@@ -23,7 +26,12 @@ class TasksScreen extends StatelessWidget{
     return Scaffold(
       appBar: AppBar(title: Text(titulo),
       ),
-      body: content,
+      body: Center(
+      child: SizedBox(
+          width: MediaQuery.of(context).size.width * 0.87,
+            child: content,
+          ),
+      ),
     );
   }
 }
