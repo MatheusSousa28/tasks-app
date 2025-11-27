@@ -1,4 +1,4 @@
-enum Prioridade {importante, normal, opcional, critica}
+enum Prioridade {baixa, media, alta}
 class Tarefa{
   const Tarefa({
     required this.id,

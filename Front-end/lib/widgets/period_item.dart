@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../data/tasks_data.dart';
 import '../model/period.dart';
-import '../screens/tasks_screens.dart';
+import '../screens/tasks_screen.dart';
+
 
 DateTime agora = DateTime.now();
 class PeriodItem extends StatelessWidget{
@@ -16,10 +16,7 @@ class PeriodItem extends StatelessWidget{
           context,
           MaterialPageRoute(
             builder: (context) {
-              final tarefasFiltro = tarefas.where(
-                (tarefa) => (tarefa.data.isBefore(DateTime(agora.year, agora.month, agora.day + periodo.dias)))
-                ).toList();
-                return TasksScreen(tarefas: tarefasFiltro, titulo: periodo.titulo);
+                return TasksScreen(periodo: periodo, titulo: periodo.titulo, completas: false,);
             })
           );
       },

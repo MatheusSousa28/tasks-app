@@ -13,12 +13,12 @@ class PeriodsScreen extends StatelessWidget{
         SizedBox(height: 80,),
         Center(
           child: SizedBox(
-            height: 400, // altura fixa
+            height: 400, 
             width: MediaQuery.of(context).size.width * 0.9,
             child:  GridView(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            crossAxisSpacing: 20,
-            mainAxisSpacing: 20,
+            crossAxisSpacing: 20,//espaçamento horizontal
+            mainAxisSpacing: 20,//espaçamento vertical
             childAspectRatio: 3/2,
             ),
             children: [

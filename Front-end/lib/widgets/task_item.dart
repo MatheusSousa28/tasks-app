@@ -1,18 +1,48 @@
-import '../model/tasks.dart';
+import '../model/task.dart';
 import 'package:flutter/material.dart';
+import 'package:tasksapp/providers/completeds_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class TaskItem extends StatelessWidget{
+
+class TaskItem extends ConsumerWidget{
   const TaskItem({super.key, required this.tarefa});
   final Tarefa tarefa;
 
   @override
-  Widget build(BuildContext context){
-    return Container(
+  Widget build(BuildContext context, WidgetRef ref){
+    final completedTasks = ref.watch(completedTasksProvider);
+    final isCompleted = completedTasks.contains(tarefa);//flag que vai ditar o estilo da tarefa
+    return Card(
       margin: const EdgeInsets.symmetric(vertical: 10),
       color: Theme.of(context).primaryColor,
-      child: InkWell(
-        onTap: (){},
-        child: Text(tarefa.titulo, style: TextStyle(color: Colors.white, fontSize: 20),),
+      child: ListTile(
+        title: isCompleted ? Text(
+          tarefa.titulo,
+          style: const TextStyle(
+            decoration: TextDecoration.lineThrough,
+            color: Colors.grey,
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+          ),
+        )
+        : Text(
+          tarefa.titulo,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        trailing: IconButton(
+          icon: Icon(
+            isCompleted ? Icons.check_circle_outline_rounded  : Icons.radio_button_unchecked_rounded,
+            color: Colors.white),
+          onPressed: () {
+            ref.read(completedTasksProvider.notifier)
+              .toggleTasksCompletedStatus(tarefa);
+          },
+        ),
+        onTap: () {},
       ),
     );
   }

@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:tasksapp/screens/home_page.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 
 void main() {
-  runApp(const TasksApp());
+  runApp(
+    const ProviderScope(
+      child: TasksApp()
+    ),
+  );
 }
 final theme = ThemeData(
-  colorScheme: ColorScheme.fromSeed(
-    brightness: Brightness.dark,
-    seedColor: const Color.fromARGB(0, 180, 255, 255)
-    ),
-    fontFamily: 'arial',
+  brightness: Brightness.dark,
+  scaffoldBackgroundColor: Colors.black,
+  colorScheme: const ColorScheme.dark(
+    surface: Colors.black,
+    primary: Colors.white,
+  ),
 );
+
 
 class TasksApp extends StatelessWidget {
   const TasksApp({super.key});
