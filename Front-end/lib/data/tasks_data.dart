@@ -57,7 +57,7 @@ final tarefas = [
     id: 't7',
     titulo: 'Buscar o carro na oficina',
     descricao: '',
-    data: agora.add(Duration(days: 1)),
+    data: agora.add(Duration(days: 2)),
     prioridade: Prioridade.alta,
   ),
   Tarefa(

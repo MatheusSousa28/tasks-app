@@ -1,6 +1,6 @@
 import '../model/task.dart';
 import 'package:flutter/material.dart';
-import 'package:tasksapp/providers/completeds_provider.dart';
+import 'package:tasksapp/providers/tasks_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 

@@ -24,12 +24,8 @@ class _HomePageState extends State<HomePage>{
     Widget activePage = const PeriodsScreen();
     var activePageTitle = 'TaskApp';
     if (_indiceAtual == 1){
-      activePage = TasksScreen(completas: false,);
+      activePage = TasksScreen();
       activePageTitle = 'Todas as tarefas';
-    }
-    else if (_indiceAtual == 2){
-      activePage = TasksScreen(completas: true,);
-      activePageTitle = 'Tarefas concluidas';
     }
 
     return Scaffold(
@@ -63,15 +59,11 @@ class _HomePageState extends State<HomePage>{
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_month_rounded),
             label: 'Periodos'
-            ),
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.assignment_rounded),
             label: 'Todas as tarefas'
-            ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.task_alt_rounded),
-            label: 'Tarefas concluidas'
-            ),
+          ),
         ],
       ),
     );

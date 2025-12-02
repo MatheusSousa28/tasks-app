@@ -16,7 +16,7 @@ class PeriodItem extends StatelessWidget{
           context,
           MaterialPageRoute(
             builder: (context) {
-                return TasksScreen(periodo: periodo, titulo: periodo.titulo, completas: false,);
+                return TasksScreen(periodo: periodo, titulo: periodo.titulo);
             })
           );
       },
