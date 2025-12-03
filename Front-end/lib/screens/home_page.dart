@@ -30,8 +30,8 @@ class _HomePageState extends ConsumerState<HomePage>{
       activePageTitle = 'Todas as tarefas';
     }
 
-     final themeMode = ref.watch(themeNotifierProvider);
-     final isDark = themeMode == ThemeMode.dark;
+    final themeMode = ref.watch(themeNotifierProvider);
+    final isDark = themeMode == ThemeMode.dark;
 
     return Scaffold(
       appBar: AppBar(title: Text(activePageTitle, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),), centerTitle: true, actions: [
@@ -43,7 +43,8 @@ class _HomePageState extends ConsumerState<HomePage>{
               ref.read(themeNotifierProvider.notifier).toggleTheme();
             },
           ),
-        ],),
+        ],
+      ),
       drawer: Drawer(
         child: ListView(
           children: [
@@ -57,8 +58,8 @@ class _HomePageState extends ConsumerState<HomePage>{
                     builder: (context){
                       return InformationsScreen();
                     }
-                    )
-                  );
+                  )
+                );
               },
             ),
           ],
@@ -68,7 +69,8 @@ class _HomePageState extends ConsumerState<HomePage>{
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _indiceAtual,
         onTap: _selectPage,
-        selectedItemColor: Colors.blueAccent,
+        selectedItemColor: Theme.of(context).colorScheme.secondary,
+        unselectedItemColor: Theme.of(context).colorScheme.primary,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_month_rounded),

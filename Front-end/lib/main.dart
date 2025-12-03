@@ -26,6 +26,11 @@ class TasksApp extends ConsumerWidget {
 
       theme: ThemeData(
         brightness: Brightness.light,
+        colorScheme: const ColorScheme.light(
+          surface: Colors.white,
+          primary: Colors.black,
+          secondary: Color.fromARGB(255, 0, 75, 204)
+        ),
       ),
 
       darkTheme: ThemeData(
@@ -34,6 +39,7 @@ class TasksApp extends ConsumerWidget {
         colorScheme: const ColorScheme.dark(
           surface: Colors.black,
           primary: Colors.white,
+          secondary: Color.fromARGB(255, 0, 75, 204)
         ),
       ),
       home: const HomePage(),

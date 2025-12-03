@@ -59,7 +59,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                       ref.read(filtroProvider.notifier).state = "Pendentes";
                     }, 
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: filtro == 'Pendentes' ? Colors.blueAccent : Colors.black,
+                      backgroundColor: filtro == 'Pendentes' ? Theme.of(context).colorScheme.secondary : Theme.of(context).colorScheme.surface,
                       padding: EdgeInsets.symmetric(
                         vertical: 2,
                         horizontal: 15,
@@ -67,13 +67,13 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                         side: BorderSide(
-                          color: Colors.blueAccent,
+                          color: Theme.of(context).colorScheme.secondary,
                           width: 2,
                         )
                       )
                     ),
                     child: Text("Pendentes", style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      color: filtro == 'Pendentes' ? Colors.black : Colors.blueAccent,
+                      color: filtro == 'Pendentes' ? Theme.of(context).colorScheme.surface : Theme.of(context).colorScheme.secondary,
                       fontWeight: FontWeight.bold
                       ),
                     ),
@@ -83,7 +83,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                       ref.read(filtroProvider.notifier).state = 'Completas';
                     }, 
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: filtro == 'Completas' ? Colors.blueAccent : Colors.black,
+                      backgroundColor: filtro == 'Completas' ? Theme.of(context).colorScheme.secondary : Theme.of(context).colorScheme.surface,
                       padding: EdgeInsets.symmetric(
                         vertical: 2,
                         horizontal: 15,
@@ -91,13 +91,13 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                         side: BorderSide(
-                          color: Colors.blueAccent,
+                          color: Theme.of(context).colorScheme.secondary,
                           width: 2,
                         )
                       )
                     ),
                     child: Text("Completas", style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      color: filtro == 'Completas' ? Colors.black : Colors.blueAccent,
+                      color: filtro == 'Completas' ? Theme.of(context).colorScheme.surface : Theme.of(context).colorScheme.secondary,
                       fontWeight: FontWeight.bold
                       ),
                     ),
@@ -107,7 +107,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                       ref.read(filtroProvider.notifier).state = "Todas";
                     }, 
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: filtro == 'Todas' ? Colors.blueAccent : Colors.black,
+                      backgroundColor: filtro == 'Todas' ? Theme.of(context).colorScheme.secondary : Theme.of(context).colorScheme.surface,
                       padding: EdgeInsets.symmetric(
                         vertical: 2,
                         horizontal: 15,
@@ -115,13 +115,13 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                         side: BorderSide(
-                          color: Colors.blueAccent,
+                          color: Theme.of(context).colorScheme.secondary,
                           width: 2,
                         )
                       )
                     ),
                     child: Text("Todas", style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      color: filtro == 'Todas' ? Colors.black : Colors.blueAccent,
+                      color: filtro == 'Todas' ? Theme.of(context).colorScheme.surface : Theme.of(context).colorScheme.secondary,
                       fontWeight: FontWeight.bold
                       ),
                     ),

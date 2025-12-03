@@ -14,7 +14,7 @@ class TaskItem extends ConsumerWidget{
     final isCompleted = completedTasks.contains(tarefa);//flag que vai ditar o estilo da tarefa
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 10),
-      color: Theme.of(context).primaryColor,
+      color: Theme.of(context).colorScheme.surface,
       child: ListTile(
         title: isCompleted ? Text(
           tarefa.titulo,
@@ -27,8 +27,8 @@ class TaskItem extends ConsumerWidget{
         )
         : Text(
           tarefa.titulo,
-          style: const TextStyle(
-            color: Colors.white,
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.primary,
             fontSize: 20,
             fontWeight: FontWeight.w600,
           ),
@@ -36,7 +36,7 @@ class TaskItem extends ConsumerWidget{
         trailing: IconButton(
           icon: Icon(
             isCompleted ? Icons.check_circle_outline_rounded  : Icons.radio_button_unchecked_rounded,
-            color: Colors.white),
+            color: Theme.of(context).colorScheme.primary),
           onPressed: () {
             ref.read(completedTasksProvider.notifier)
               .toggleTasksCompletedStatus(tarefa);

@@ -1,9 +1,20 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../data/tasks_data.dart';
 import '../model/task.dart';
 
 class CompletedTasksNotifier extends StateNotifier<List<Tarefa>> {
-  CompletedTasksNotifier() : super([]);
+  CompletedTasksNotifier() : super([]) {
+    _loadCompletedTasks();//chamando a funcao q carregas as tarefas do shared logo no cosntrutor
+  }
+  Future<void> _loadCompletedTasks() async {
+    final prefs = await SharedPreferences.getInstance();
+    //carrega a lista de ids das tarefas completas
+    final ids = prefs.getStringList('completedTasks') ?? [];
+    //converte esses ids em tarefas
+    final completedTasks = tarefas.where((t) => ids.contains(t.id)).toList();
+    state = completedTasks;//colocando as tarefas no estado
+  }
 
   void toggleTasksCompletedStatus(Tarefa tarefa) {
     final taskIsCompleted = state.contains(tarefa);
@@ -13,6 +24,14 @@ class CompletedTasksNotifier extends StateNotifier<List<Tarefa>> {
     } else {
       state = [...state, tarefa];
     }
+    _saveCompletedTasks();//salva a nova tarefa no shared
+  }
+
+  Future<void> _saveCompletedTasks() async {
+    final prefs = await SharedPreferences.getInstance();
+    //pegando os ids das tarefas completas como uma lista e salvando no shared
+    final ids = state.map((t) => t.id).toList();
+    prefs.setStringList('completedTasks', ids);
   }
 }
 //provider das tarefas completas
