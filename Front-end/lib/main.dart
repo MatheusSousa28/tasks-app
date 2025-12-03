@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tasksapp/screens/home_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import 'package:tasksapp/providers/theme_provider.dart';
 
 void main() {
   runApp(
@@ -10,26 +10,32 @@ void main() {
     ),
   );
 }
-final theme = ThemeData(
-  brightness: Brightness.dark,
-  scaffoldBackgroundColor: Colors.black,
-  colorScheme: const ColorScheme.dark(
-    surface: Colors.black,
-    primary: Colors.white,
-  ),
-);
 
-
-class TasksApp extends StatelessWidget {
+class TasksApp extends ConsumerWidget {
   const TasksApp({super.key});
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,  WidgetRef ref) {
+     final themeMode = ref.watch(themeNotifierProvider);
+
     return MaterialApp(
       title: 'TaskApp',
       debugShowCheckedModeBanner: false,
-      theme: theme,
+      themeMode: themeMode,
+
+      theme: ThemeData(
+        brightness: Brightness.light,
+      ),
+
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: Colors.black,
+        colorScheme: const ColorScheme.dark(
+          surface: Colors.black,
+          primary: Colors.white,
+        ),
+      ),
       home: const HomePage(),
     );
   }
