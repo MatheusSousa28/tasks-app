@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:tasksapp/screens/home_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tasksapp/providers/theme_provider.dart';
+import 'package:tasksapp/screens/tela_login.dart';
+
 
 void main() {
   runApp(
@@ -42,7 +44,7 @@ class TasksApp extends ConsumerWidget {
           secondary: Color.fromARGB(255, 0, 75, 204)
         ),
       ),
-      home: const HomePage(),
+      home: const TelaLogin(),
     );
   }
 }
