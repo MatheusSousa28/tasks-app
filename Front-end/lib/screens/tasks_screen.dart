@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import '../widgets/task_item.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../widgets/task_item.dart';
 import '../providers/filter_provider.dart';
 import '../model/period.dart';
 import '../data/tasks_data.dart';
 
 class TasksScreen extends ConsumerStatefulWidget {
   const TasksScreen({super.key, this.periodo, this.titulo});
-
   final Periodo? periodo;
   final String? titulo;
 
@@ -15,139 +15,110 @@ class TasksScreen extends ConsumerStatefulWidget {
   ConsumerState<TasksScreen> createState() => _TasksScreenState();
 }
 class _TasksScreenState extends ConsumerState<TasksScreen> {
-
   @override
   void initState() {
     super.initState();
-    //quando a página n recebe um periodo
+
     if (widget.periodo != null) {
-      Future.microtask(() {//microTask faz com q o estado seja mudado imediatamente após o build
-        ref.read(filtroProvider.notifier).state = "Pendentes";//estado do filtro mostra somente as tarefas pendentes
+      Future.microtask(() {
+        ref.read(filtroProvider.notifier).state = "Pendentes";
       });
-    }
-  }
+       }}
 
   @override
-  Widget build(BuildContext context){
-    var tasks = ref.watch(filteredTasksProvider);//retorna a lista de tarefas com base no filtro atual
-    final filtro = ref.watch(filtroProvider);//retorna o filtro atual
-    if (widget.periodo != null){//se a página recebeu um periodo
-      final limite = agora.add(Duration(days: widget.periodo!.dias));//pegando a data limite do periodo
+  Widget build(BuildContext context) {
+    var tasks = ref.watch(filteredTasksProvider);
+    final filtro = ref.watch(filtroProvider);
+
+
+    if (widget.periodo != null) {
+      final limite =
+        agora.add(Duration(days: widget.periodo!.dias));
       tasks = tasks.where((tarefa) {
-        //retorna as tarefas que estão antes e extamente na data limite
-        return tarefa.data.isBefore(limite) || tarefa.data.isAtSameMomentAs(limite);
+        return tarefa.data.isBefore(limite) ||
+            tarefa.data.isAtSameMomentAs(limite);
       }).toList();
     }
+
     Widget content = Center(
-      child: Text("Nada para mostrar", 
-      style: Theme.of(context).textTheme.titleLarge!.copyWith(
-        color: Theme.of(context).colorScheme.onSurface,
-        )),
-    );
-    if (tasks.isNotEmpty || widget.periodo == null){//esse bloco acontece se n existe tarefas ou se n tem periodo
+      child: Text(
+        "Nada para mostrar",
+        style: Theme.of(context).textTheme.titleLarge!.copyWith(
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+      ), );
+
+    if (tasks.isNotEmpty || widget.periodo == null) {
       content = Column(
         children: [
-          if (widget.periodo == null)//se a pagina n recebeu periodo, constroi uma row com os botões de filtro
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 16),
-              child:  Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+          
+             if (widget.periodo == null)
+               Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+              child: Wrap(
+                alignment: WrapAlignment.center,
+                spacing: 8,
+                   runSpacing: 8,
                 children: [
-                  //cada botão quando é prssionado muda o filtro
-                  ElevatedButton(
-                    onPressed:() {
-                      ref.read(filtroProvider.notifier).state = "Pendentes";
-                    }, 
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: filtro == 'Pendentes' ? Theme.of(context).colorScheme.secondary : Theme.of(context).colorScheme.surface,
-                      padding: EdgeInsets.symmetric(
-                        vertical: 2,
-                        horizontal: 15,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        side: BorderSide(
-                          color: Theme.of(context).colorScheme.secondary,
-                          width: 2,
-                        )
-                      )
-                    ),
-                    child: Text("Pendentes", style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      color: filtro == 'Pendentes' ? Theme.of(context).colorScheme.surface : Theme.of(context).colorScheme.secondary,
-                      fontWeight: FontWeight.bold
-                      ),
-                    ),
+                  _filterButton(
+                    context,
+                    label: "Pendentes",
+                    isSelected: filtro == "Pendentes",
+                    onPressed: () {
+                      ref.read(filtroProvider.notifier).state =
+                          "Pendentes";
+                    },
                   ),
-                  ElevatedButton(
-                    onPressed:() {
-                      ref.read(filtroProvider.notifier).state = 'Completas';
-                    }, 
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: filtro == 'Completas' ? Theme.of(context).colorScheme.secondary : Theme.of(context).colorScheme.surface,
-                      padding: EdgeInsets.symmetric(
-                        vertical: 2,
-                        horizontal: 15,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        side: BorderSide(
-                          color: Theme.of(context).colorScheme.secondary,
-                          width: 2,
-                        )
-                      )
-                    ),
-                    child: Text("Completas", style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      color: filtro == 'Completas' ? Theme.of(context).colorScheme.surface : Theme.of(context).colorScheme.secondary,
-                      fontWeight: FontWeight.bold
-                      ),
-                    ),
+                  _filterButton(
+                    context,
+                    label: "Completas",
+                      isSelected: filtro == "Completas",
+                    onPressed: () {
+                      ref.read(filtroProvider.notifier).state =
+                          "Completas";
+                    },
                   ),
-                  ElevatedButton(
-                    onPressed:() {
-                      ref.read(filtroProvider.notifier).state = "Todas";
-                    }, 
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: filtro == 'Todas' ? Theme.of(context).colorScheme.secondary : Theme.of(context).colorScheme.surface,
-                      padding: EdgeInsets.symmetric(
-                        vertical: 2,
-                        horizontal: 15,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        side: BorderSide(
-                          color: Theme.of(context).colorScheme.secondary,
-                          width: 2,
-                        )
-                      )
-                    ),
-                    child: Text("Todas", style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      color: filtro == 'Todas' ? Theme.of(context).colorScheme.surface : Theme.of(context).colorScheme.secondary,
-                      fontWeight: FontWeight.bold
-                      ),
-                    ),
+                  _filterButton(
+                      context,
+                    label: "Todas",
+                    isSelected: filtro == "Todas",
+                     onPressed: () {
+                      ref.read(filtroProvider.notifier).state =
+                          "Todas";
+                    },
                   ),
                 ],
               ),
             ),
-            tasks.isEmpty ?//se n tem tarefas
-              Center(
-                child: Text("Nada para mostrar", 
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface,
-                  )),
-              ) 
-              : Expanded(//se tem tarefas, constrói a listview
-                child: ListView.builder(
-                  itemCount: tasks.length,
-                  itemBuilder: (context, index) => TaskItem(tarefa: tasks[index]),
+
+      
+          tasks.isEmpty
+              ? Center(
+                  child: Text(
+                    "Nada para mostrar",
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge!
+                        .copyWith(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSurface,
+                        ),
+                  ),
                 )
-              )
-        ]
+              : Expanded(
+                  child: ListView.builder(
+                    itemCount: tasks.length,
+                    itemBuilder: (context, index) =>
+                        TaskItem(tarefa: tasks[index]),
+                  ),
+                ),
+        ],
       );
     }
 
-    if (widget.titulo == null){
-	    return content;
+    if (widget.titulo == null) {
+      return content;
     }
 
     return Scaffold(
@@ -155,6 +126,41 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
         title: Text(widget.titulo!),
       ),
       body: content,
+    );
+  }
+  Widget _filterButton(
+    BuildContext context, {
+    required String label,
+    required bool isSelected,
+    required VoidCallback onPressed,
+  }) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSelected
+            ? Theme.of(context).colorScheme.secondary
+            : Theme.of(context).colorScheme.surface,
+        padding: const EdgeInsets.symmetric(
+          vertical: 6,
+          horizontal: 16,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+          side: BorderSide(
+            color: Theme.of(context).colorScheme.secondary,
+            width: 2,
+          ),
+        ),
+      ),
+      child: Text(
+        label,
+        style: Theme.of(context).textTheme.titleLarge!.copyWith(
+              color: isSelected
+                  ? Theme.of(context).colorScheme.surface
+                  : Theme.of(context).colorScheme.secondary,
+              fontWeight: FontWeight.bold,
+            ),
+      ),
     );
   }
 }

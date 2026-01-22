@@ -22,10 +22,10 @@ class _TelaCadastroState extends State<TelaCadastro> {
   String? erro;
 
 
-  //Função para salvar dados em arquivo local
+  // salva dados em arquivo local
    Future<void> salvarUsuario(String username, String senha) async {
 
-    print("Salvando usuário...");
+    print("Salvando usuário");
   // Cria o mapa com os dados
   final dados = {
     "username": username,
@@ -36,14 +36,14 @@ class _TelaCadastroState extends State<TelaCadastro> {
 
   // Pega o diretório local seguro do usuário
   final dir = await getApplicationDocumentsDirectory();
-  print("Diretório: ${dir.path}"); 
+  print("diretório: ${dir.path}"); 
 
   //Define o arquivo onde vamos salvar
   final arquivo = File("${dir.path}/usuario.json");
 
   // Escreve o conteúdo no arquivo
   await arquivo.writeAsString(jsonString);
-   print("Usuário salvo!"); // DEBUG
+   print("usuário salvo"); 
 }
 
 
@@ -61,12 +61,11 @@ class _TelaCadastroState extends State<TelaCadastro> {
     });
 
     if (user.isEmpty) {
-      setState(() => erro = "O usuário não pode ser vazio.");
+      setState(() => erro = " usuário não pode ser vazio.");
       return;
     }
-
     if (s1.isEmpty || s2.isEmpty) {
-      setState(() => erro = "Digite a senha e a confirmação.");
+      setState(() => erro = "digite a senha e a confirmação.");
       return;
     }
    

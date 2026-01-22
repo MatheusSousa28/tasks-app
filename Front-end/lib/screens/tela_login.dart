@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'tela_cadastro.dart';
-import 'home_page.dart'; // <-- adicionei a import da HomePage
+import 'home_page.dart'; //
 
 //função pra carregar usuario salvo
 Future<Map<String, dynamic>?> carregarUsuario() async {
@@ -32,7 +32,7 @@ class _TelaLoginState extends State<TelaLogin> {
 
   String erro = ""; // mensagem de erro
 
-  // funcao de login
+  // funcao de login AQUI IR PRO BODY
   Future<void> fazerLogin() async {
     Map<String, dynamic>? dados = await carregarUsuario();
 
@@ -65,7 +65,7 @@ class _TelaLoginState extends State<TelaLogin> {
 
       // Navega para a HomePage
       Future.delayed(const Duration(milliseconds: 500), () {
-        Navigator.pushReplacement(
+        Navigator.pushReplacement( 
           context,
           MaterialPageRoute(builder: (_) => const HomePage()),
         );

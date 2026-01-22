@@ -5,13 +5,13 @@ import '../model/task.dart';
 
 class CompletedTasksNotifier extends StateNotifier<List<Tarefa>> {
   CompletedTasksNotifier() : super([]) {
-    _loadCompletedTasks();//chamando a funcao q carregas as tarefas do shared logo no cosntrutor
+    _loadCompletedTasks();
   }
   Future<void> _loadCompletedTasks() async {
     final prefs = await SharedPreferences.getInstance();
-    //carrega a lista de ids das tarefas completas
+   
     final ids = prefs.getStringList('completedTasks') ?? [];
-    //converte esses ids em tarefas
+    
     final completedTasks = tarefas.where((t) => ids.contains(t.id)).toList();
     state = completedTasks;//colocando as tarefas no estado
   }
